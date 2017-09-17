@@ -1,0 +1,93 @@
+.goods-column {
+    width: 50%!important;
+    min-width: 400px;
+    padding-right: 6%; 
+    padding-left: 0px;
+    height: 100%!important;    
+    
+}
+
+.goods-main-panel {
+    height: 100%!important;    
+}
+
+.goods-add-panel {
+    padding: 1em;
+    height: 40px!important;
+}
+
+.goods-add-form {
+    
+    background-color: rosybrown;
+    /* min-height: 50px!important; */
+    height: 100%!important;
+    
+}
+
+.goods-row-panel {
+    border-top: 1px solid rgba(34,36,38,.15);
+    overflow: hidden;
+    border-radius: 0;
+    background-color: wheat;
+    
+}
+
+/* row block panels 
+*/
+.name, .quantity-button-panel, .buy-panel {
+    /* display: inline-block; */
+    min-width:33%;
+    float: left;
+    border-radius: 0;
+}
+
+.name {
+    
+}
+
+.goods-row-panel:last-child {
+    border-bottom-left-radius: 5px!important;
+    border-bottom-right-radius: 5px!important;
+}
+
+.quantity-button-panel {
+    
+    
+}
+
+.input-form {
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    height: 40px;
+}
+
+input {
+    width: 75%;
+    border-top-right-radius: 0px!important;
+    border-bottom-right-radius: 0px!important;
+    /*  */
+    padding-left: 2%;
+    padding-top: 0px;
+    padding-bottom: 0;
+    margin:0px;
+}
+
+button {
+    width: 23%;
+    border-top-left-radius: 0px!important;
+    border-bottom-left-radius: 0px!important;
+    /* height: 100%!important; */
+    /* display: flex; */
+    align-items: center;
+    flex: 0 0 auto;
+    background-color: #2185D0;
+    padding-left: 2em;
+    padding-right: 2em;
+    
+}
+
+input, button {
+    height: 100%!important;
+    border: 0px;
+}
