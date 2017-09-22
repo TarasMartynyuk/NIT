@@ -1,6 +1,7 @@
 .goods-column {
     width: 50%!important;
-    min-width: 400px;
+    min-width: 500px;
+    max-width: 950px;
     padding-right: 6%; 
     padding-left: 0px;
     height: 100%!important;  
@@ -85,9 +86,12 @@ input {
     border-top-left-radius: 0px!important;
     border-bottom-left-radius: 0px!important;
 
-    height: 43px;
+    height: 42px;
     padding-left: 2em;
     padding-right: 2em;
+    padding-bottom: 6px;
+    padding-top: 9px;
+    
 }
 
 input, button {
