@@ -3,12 +3,56 @@
     height: 100%!important;    
     min-width: 200px;
     /*max-height: 80%!important;*/
+    
+    
+}
+
+.label {
+    width: 100%;
+    padding: 1em;
+    background-color: #FFF;
+    height: 18px!important;
+}
+
+.goods-avatar-label {
+    background-color: #E8E8E8;
+
+    font-size: .64285714rem;
+    margin-left: 0;
+    display: inline-block;
+    /* line-height: 1; */
+
+    margin-right: 0.35em;
+    padding: .5833em .833em;
+    margin-bottom: 3px!important;
+}
+
+.count-label {
+    min-width: 8px;
+    min-height: 8px;
+    padding: .4em!important;
+    /* padding-bottom: 0px; */
+    text-align: center;
+    border-radius: 500rem;
+    line-height: 1em;
 
 
+    background-color: #F2711C!important;
+    border-color: #F2711C!important;
+    color: #FFF!important;
 
+    display: inline-block;
+    font-weight: 700;
+    font-size: .64285714rem;
+    margin-left: 0.3em;
+}
 
-    background-color: bisque;
+h3{
+    margin-bottom: 0px;
+    margin-top: 0px;
+    font-size: 1.28rem;
 
+    display: inline-block;
     
 }
 

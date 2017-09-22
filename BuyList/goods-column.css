@@ -3,12 +3,15 @@
     min-width: 400px;
     padding-right: 6%; 
     padding-left: 0px;
-    height: 100%!important;    
+    height: 100%!important;  
+    
     
 }
 
 .goods-main-panel {
-    height: 100%!important;    
+    height: 100%!important;  
+    background-color: #FFF;
+    
 }
 
 .goods-add-panel {
@@ -18,40 +21,9 @@
 
 .goods-add-form {
     
-    background-color: rosybrown;
-    /* min-height: 50px!important; */
+    min-height: 50px!important;
+
     height: 100%!important;
-    
-}
-
-.goods-row-panel {
-    border-top: 1px solid rgba(34,36,38,.15);
-    overflow: hidden;
-    border-radius: 0;
-    background-color: wheat;
-    
-}
-
-/* row block panels 
-*/
-.name, .quantity-button-panel, .buy-panel {
-    /* display: inline-block; */
-    min-width:33%;
-    float: left;
-    border-radius: 0;
-}
-
-.name {
-    
-}
-
-.goods-row-panel:last-child {
-    border-bottom-left-radius: 5px!important;
-    border-bottom-right-radius: 5px!important;
-}
-
-.quantity-button-panel {
-    
     
 }
 
@@ -64,6 +36,7 @@
 
 input {
     width: 75%;
+    height: 40px;
     border-top-right-radius: 0px!important;
     border-bottom-right-radius: 0px!important;
     /*  */
@@ -71,23 +44,54 @@ input {
     padding-top: 0px;
     padding-bottom: 0;
     margin:0px;
+    outline: 0px;
+
+
+    border: 1px solid rgba(34,36,38,.15);
+    border-right-color: transparent!important;
 }
 
-button {
-    width: 23%;
+.shaded-button {
+    width: 22%;
+    height: 33px;
+
+    text-align: center;
+    flex: 0 0 auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    font-weight: 700;
+    letter-spacing: normal;
+    word-spacing: normal;
+    font-size: .71428571rem;
+
+    overflow: visible;
+
+    background: linear-gradient(transparent,rgba(0,0,0,.05)) #F8F8F8;
+
+    outline: 0px;
+    border: none;
+
+    box-shadow: 0 0 0 1px rgba(34,36,38,.15) inset,
+        0 -0.3em 0 0 rgba(34,36,38,.15) inset;
+}
+
+.white-font {
+    color: #FFF;
+}
+
+.add-button {
+    background-color: rgb(33, 133, 208);
     border-top-left-radius: 0px!important;
     border-bottom-left-radius: 0px!important;
-    /* height: 100%!important; */
-    /* display: flex; */
-    align-items: center;
-    flex: 0 0 auto;
-    background-color: #2185D0;
+
+    height: 43px;
     padding-left: 2em;
     padding-right: 2em;
-    
 }
 
 input, button {
-    height: 100%!important;
-    border: 0px;
+    min-height: 1em;
+    font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
 }
+

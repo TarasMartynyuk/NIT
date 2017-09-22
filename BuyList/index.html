@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="main-container.css" />    
     <link rel="stylesheet" type="text/css" href="goods-column.css" />
     <link rel="stylesheet" type="text/css" href="basket-column.css" />
+    <link rel="stylesheet" type="text/css" href="goods-row.css" />
     
     
 </head>
@@ -17,41 +18,68 @@
 
                 <div class="goods-add-panel">
                     <div class="goods-add-form">
-                        <input type="text" placeholder="Назва Товару"><button>Додати</button>
+
+                        <input type="text" placeholder="Назва Товару"
+                        ><button class="shaded-button add-button white-font">Додати</button>
+                        
                     </div>
                 </div>
                 
-                <div class="goods-row-panel">
+                <div class="row-panel">
                     <div class="name">
-                        <p>Name block</p>
+                        <p>Помідори</p>
                     </div>
                     <div class="quantity-button-panel">
-                        <p>Quantity block</p>
+                        
+                        <button class="round-button red">-</button
+                        ><span class="quantity-label">1</span
+                        ><button class="round-button green">+</button>
                     </div>
                     <div class="buy-panel">
-                        <p>Buy Button block</p>
+                        <button class="shaded-button buy-panel-button white-font red" 
+                        >&#10006;</button
+                        ><button class="shaded-button buy-panel-button" 
+                            style="width: 50%" >Куплено</button>
                     </div>
-                </div>
+                </div
+                ><div class="row-panel">
+                        <div class="name">
+                            <p>Помідори</p>
+                        </div>
+                        <div class="quantity-button-panel">                        
+                            <button class="round-button red">-</button
+                            ><span class="quantity-label">1</span
+                            ><button class="round-button green">+</button>
+                        </div>
+                        <div class="buy-panel">
+                            <button class="shaded-button buy-panel-button white-font red" 
+                            >&#10006;</button
+                            ><button class="shaded-button buy-panel-button" 
+                                style="width: 50%" >Куплено</button>
+                        </div>
+                    </div>
 
-                <div class="goods-row-panel">
-                    <div class="name">
-                        <p>Name block</p>
-                    </div>
-                    <div class="quantity-button-panel">
-                        <p>Quantity block</p>
-                    </div>
-                    <div class="buy-panel">
-                        <p>Buy Button block</p>
-                    </div>
-                </div>
+                
 
             </div>
         </div>
 
         <div class="basket-column">
-            <h1>Basket Column</h1>
+            <div class="row-panel label"><h3>Залишилося</h3></div
+            ><div class="row-panel label">
+                <span class="goods-avatar-label"
+                ><span class="title">Помідори</span
+                ><span class="count-label">1</span
+                ></span
+                ><span class="goods-avatar-label"
+                ><span class="title">Гриби</span
+                ><span class="count-label">10</span
+                ></span>
+            </div
+            ><div class="row-panel label"><h3>Куплено</h3></div
+            ><div class="row-panel label"></div
+            >
                 
-            <p>Stuff</p>
         </div>
     </div>
 </body>

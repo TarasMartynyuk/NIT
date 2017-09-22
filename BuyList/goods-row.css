@@ -1,0 +1,117 @@
+.row-panel {
+    border-top: 1px solid rgba(34,36,38,.15);
+    overflow: hidden;
+    border-radius: 0;
+    height: 48px;
+}
+
+/* row block panels 
+*/
+.name, .quantity-button-panel, .buy-panel {
+    
+    float: left;
+    border-radius: 0;
+
+}
+
+
+.quantity-button-panel, .buy-panel {
+    width: 26%!important;
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-bottom: 0px;
+
+    height: 37px;
+    
+}
+
+.buy-panel {
+    padding-right: 0px;
+    
+}
+
+.name {
+    width: 20%!important;
+    padding: 14px;
+}
+
+.row-panel:last-child {
+    border-bottom-left-radius: 5px!important;
+    border-bottom-right-radius: 5px!important;
+}
+
+.quantity-button-panel {
+    overflow: hidden;
+    text-align: center;
+    margin-right: 8%;
+    margin-left: 8%;
+    width: 50%;
+    
+}
+/* quantity-button-panel child elements */
+.round-button {
+    color: #FFF;
+    font-size: 1rem;
+
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    
+    margin-right: 0.40em; 
+    margin-left: 0.40em;
+    margin-top: .5em;
+    line-height: .5em;
+
+    padding-top: .6em;
+    padding-right: .5em;
+    padding-bottom: .6em;
+    padding-left: .5em;
+
+    border-radius: 10em;
+
+    border: 0px;
+}
+
+.quantity-label {
+    /* float: left; */
+    display: inline-block;
+    background-color: #E8E8E8;;
+
+    margin: 4px;
+
+    padding-top: .7em;
+    padding-right: 1em;
+    padding-bottom: .7em;
+    padding-left: 1em;
+    font-size: .71428571rem;
+
+    
+}
+
+.buy-panel-button {
+    float: right;
+    width: 33px;
+    
+    margin-right: 12px;
+    border: 0px;
+    line-height: 1em; 
+
+}
+
+
+
+
+
+
+
+.green {
+    background-color: #21BA45;
+}
+
+.red {
+    background-color: #DB2828;
+}
+
+
+
