@@ -1,0 +1,59 @@
+.badge {
+    background-color: #7827C4;
+    box-sizing:	border-box;
+
+    position: fixed;
+    bottom: -45px;
+    left: 20px;
+
+    width: 130px;
+    height: 97px;
+    
+    /* bottom: -6.75%; */
+    
+    /* left: 2%; */
+
+    /* width: 12%; */
+    /* height: 15%; */
+    
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px; 
+
+    transition:	all	1s	ease;
+}
+
+.badge:hover {
+    background-color: #3E3E97;
+    bottom: 0px;
+
+}
+
+
+
+
+.badge-text {
+    color: #FFF;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+h1.badge-text {
+    margin-top: 15px;    
+    margin-bottom: 12px;
+}
+
+p.badge-text {
+    margin-bottom: 0px;
+    font-size: 1.0em;
+}
+
+@media	print	{
+    .badge-text{
+        background-color: #FFF;
+        color: #000;
+    }
+
+    .badge {
+        border: 1px solid #7827C4;
+    }
+}

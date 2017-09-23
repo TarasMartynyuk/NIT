@@ -1,10 +1,16 @@
 .goods-column {
-    width: 50%!important;
-    min-width: 500px;
-    max-width: 950px;
+    box-sizing: border-box;
+    
+
+    width: 70%!important;
+    min-width: 550px;
     padding-right: 6%; 
     padding-left: 0px;
     height: 100%!important;  
+
+    margin-bottom: 30px;
+
+    flex: 2.5;
     
     
 }
