@@ -1,24 +1,17 @@
 .goods-column {
     box-sizing: border-box;
-    
-
     width: 70%!important;
     min-width: 550px;
     padding-right: 6%; 
     padding-left: 0px;
     height: 100%!important;  
-
     margin-bottom: 30px;
-
     flex: 2.5;
-    
-    
 }
 
 .goods-main-panel {
     height: 100%!important;  
     background-color: #FFF;
-    
 }
 
 .goods-add-panel {
@@ -27,11 +20,8 @@
 }
 
 .goods-add-form {
-    
     min-height: 50px!important;
-
     height: 100%!important;
-    
 }
 
 .input-form {
@@ -52,8 +42,6 @@ input {
     padding-bottom: 0;
     margin:0px;
     outline: 0px;
-
-
     border: 1px solid rgba(34,36,38,.15);
     border-right-color: transparent!important;
 }
@@ -66,19 +54,15 @@ input {
     flex: 0 0 auto;
     padding-top: 10px;
     padding-bottom: 10px;
-
     font-weight: 700;
     letter-spacing: normal;
     word-spacing: normal;
     font-size: .71428571rem;
 
     overflow: visible;
-
     background: linear-gradient(transparent,rgba(0,0,0,.05)) #F8F8F8;
-
     outline: 0px;
     border: none;
-
     box-shadow: 0 0 0 1px rgba(34,36,38,.15) inset,
         0 -0.3em 0 0 rgba(34,36,38,.15) inset;
 }
@@ -104,4 +88,3 @@ input, button {
     min-height: 1em;
     font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
 }
-

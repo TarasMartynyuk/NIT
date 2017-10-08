@@ -3,14 +3,12 @@
 <head lang="uk">
     <meta charset="UTF-8">
     <title>My Page</title>
-    <link rel="stylesheet" type="text/css" href="main-container.css" />    
-    <link rel="stylesheet" type="text/css" href="goods-column.css" />
-    <link rel="stylesheet" type="text/css" href="basket-column.css" />
-    <link rel="stylesheet" type="text/css" href="goods-row.css" />
-    <link rel="stylesheet" type="text/css" href="badge.css" />
-    
-    
-    
+    <link rel="stylesheet" type="text/css" href="css\main-container.css" />    
+    <link rel="stylesheet" type="text/css" href="css\goods-column.css" />
+    <link rel="stylesheet" type="text/css" href="css\basket-column.css" />
+    <link rel="stylesheet" type="text/css" href="css\goods-row.css" />
+    <link rel="stylesheet" type="text/css" href="css\badge.css" />
+    <link rel="stylesheet" type="text/css" href="css\tooltip.css" />
 </head>
 
 <body>
@@ -20,10 +18,9 @@
 
                 <div class="goods-add-panel">
                     <div class="goods-add-form">
-
                         <input type="text" placeholder="Назва Товару"
-                        ><button class="shaded-button add-button white-font">Додати</button>
-                        
+                        ><button class="shaded-button add-button white-font"
+                        data-tooltip="створити новий тип товарів">Додати</button>
                     </div>
                 </div>
                 
@@ -32,10 +29,10 @@
                         <p>Помідори</p>
                     </div>
                     <div class="quantity-button-panel">
-                        
-                        <button class="round-button red">-</button
+                        <button class="round-button red" 
+                        data-tooltip="зменшити кількість">-</button
                         ><span class="quantity-label">3</span
-                        ><button class="round-button green">+</button>
+                        ><button class="round-button green" data-tooltip="збільшити кількість">+</button>
                     </div>
                     <div class="buy-panel">
                         <button class="shaded-button buy-panel-button white-font red" 
@@ -49,7 +46,8 @@
                             <p>Шинка</p>
                         </div>
                         <div class="quantity-button-panel">                        
-                            <button class="round-button red">-</button
+                            <button class="round-button red"
+                            data-tooltip="зменшити кількість">-</button
                             ><span class="quantity-label">1</span
                             ><button class="round-button green">+</button>
                         </div>
@@ -57,17 +55,15 @@
                             <button class="shaded-button buy-panel-button white-font red" 
                             >&#10006;</button
                             ><button class="shaded-button buy-panel-button" 
-                                style="width: 50%" >Куплено</button>
+                                style="width: 50%"data-tooltip="збільшити кількість">Куплено</button>
                         </div>
                     </div>
-
-                
-
             </div>
         </div>
 
         <div class="basket-column">
-            <div class="row-panel label" style="border-top-left-radius: 5px; border-top-right-radius: 5px;"><h3>Залишилося</h3></div
+            <div class="row-panel label" style="border-top-left-radius: 5px; border-top-right-radius: 5px;"
+            data-tooltip="SMTH"><h3>Залишилося</h3></div
             ><div class="row-panel label">
                 <span class="goods-avatar-label"
                 ><span class="title">Перець</span
@@ -81,7 +77,6 @@
             ><div class="row-panel label"><h3>Куплено</h3></div
             ><div class="row-panel label"></div
             >
-                
         </div>
     </div>
 
@@ -91,6 +86,8 @@
     ><p class="badge-text" style="font-weight: bold; font-size: 1.15em">Taras Martynyuk</p
     ></div>
 
+    <script	type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js">	</script>
+    <script	type="text/javascript" src="code.js"></script>
 </body>
 
 
