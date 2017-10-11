@@ -3,7 +3,6 @@
   z-index: 2;
   cursor: pointer;
 }
-
 /* Hide the tooltip content by default */
 [data-tooltip]:before,
 [data-tooltip]:after {
@@ -11,7 +10,6 @@
   opacity: 0;
   pointer-events: none;
 }
-
 /* Position tooltip above the element */
 [data-tooltip]:before {
   position: absolute;
@@ -31,7 +29,6 @@
   font-size: 14px;
   line-height: 1.2;
 }
-
 /* Triangle hack to make tooltip look like a speech bubble */
 [data-tooltip]:after {
   position: absolute;

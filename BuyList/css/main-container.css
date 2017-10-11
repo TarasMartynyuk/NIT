@@ -9,30 +9,23 @@
     margin-top: 120px;
     margin-bottom: 120px;
 }
-
 /* for all descendants(children +grandchildren +..) of tags  */
 .general-container *  {
     border-radius: 5px;
 }
-
 html, body {
     font-size: 14px;
 }
-
 body {
     background-color: #DADADA;
 }
-
 p {
     line-height: 1.4285em;
 }
-
 h1, p {
     margin: 0px
 }
-
 button { cursor : pointer}
-
 * {
     z-index: 0;
 }

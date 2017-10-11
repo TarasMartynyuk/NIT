@@ -1,38 +1,32 @@
 .basket-column {
     box-sizing: border-box;
-
     width: 30%;
     height: 100%!important;    
-    
     padding-right: 6%;
-    
-    
     flex: 1;
-    
 }
-
 .label {
-    
-
     /* width: 90%; */
     padding: 1em;
     background-color: #FFF;
     height: 18px!important;
 }
-
+.stat {
+    /* mark rows that have statistic labels inside */
+}
+.title{
+    font-size: 1.15em;
+}
 .goods-avatar-label {
     background-color: #E8E8E8;
-
     font-size: .64285714rem;
     margin-left: 0;
     display: inline-block;
     /* line-height: 1; */
-
     margin-right: 0.35em;
     padding: .5833em .833em;
     margin-bottom: 3px!important;
 }
-
 .count-label {
     min-width: 8px;
     min-height: 8px;
@@ -41,8 +35,6 @@
     text-align: center;
     border-radius: 500rem;
     line-height: 1em;
-
-
     background-color: #F2711C!important;
     border-color: #F2711C!important;
     color: #FFF!important;
