@@ -3,12 +3,7 @@ var template = $('.row-panel').get(0).outerHTML;
 var container = $(".goods-main-panel:first");
 //dictionary {"item name" : item stat label}
 // TODO: add var
-name_label_dict = {}
-not_bought_label_cont.children().map(function(i, e) {
-    name_label_dict[$(e).find('.title').text()] = $(e);
-		console.log($(e))
-})
-});
+name_label_dict = {};
 
 //add new element to list event
 function add_new_row() {
@@ -130,7 +125,10 @@ $(".round-button.green").click(increment_quantity);
 var not_bought_label_cont = $($('.row-panel.stat')[0]);
 var bought_label_cont = $($('.row-panel.stat')[1]);
 var stat_label_template = $('.goods-avatar-label').get(0).outerHTML;
-
+not_bought_label_cont.children().map(function(i, e) {
+    name_label_dict[$(e).find('.title').text()] = $(e);
+		console.log($(e))
+});
 //rename handling
 var old_name;
 function on_rename_start(){
@@ -144,3 +142,5 @@ function on_rename_end(){
 }
 $("p[contenteditable='true']").click(on_rename_start);
 $("p[contenteditable='true']").blur(on_rename_end);
+
+});

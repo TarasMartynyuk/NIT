@@ -8,29 +8,24 @@
     margin-bottom: 30px;
     flex: 2.5;
 }
-
 .goods-main-panel {
     height: 100%!important;  
     background-color: #FFF;
 }
-
 .goods-add-panel {
     padding: 1em;
     height: 40px!important;
 }
-
 .goods-add-form {
     min-height: 50px!important;
     height: 100%!important;
 }
-
 .input-form {
     margin: 0px;
     padding: 0px;
     border: 0px;
     height: 40px;
 }
-
 input {
     width: 75%;
     height: 40px;
@@ -45,7 +40,6 @@ input {
     border: 1px solid rgba(34,36,38,.15);
     border-right-color: transparent!important;
 }
-
 .shaded-button {
     width: 22%;
     height: 33px;
@@ -66,11 +60,9 @@ input {
     box-shadow: 0 0 0 1px rgba(34,36,38,.15) inset,
         0 -0.3em 0 0 rgba(34,36,38,.15) inset;
 }
-
 .white-font {
     color: #FFF;
 }
-
 .add-button {
     background-color: rgb(33, 133, 208);
     border-top-left-radius: 0px!important;
@@ -83,7 +75,6 @@ input {
     padding-top: 9px;
     
 }
-
 input, button {
     min-height: 1em;
     font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
