@@ -31,6 +31,8 @@ h1, p {
     margin: 0px
 }
 
+button { cursor : pointer}
+
 * {
     z-index: 0;
 }

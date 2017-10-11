@@ -13,8 +13,6 @@
     border-radius: 0;
 
 }
-
-
 .quantity-button-panel, .buy-panel {
     width: 26%!important;
     padding-top: 10px;
@@ -25,29 +23,23 @@
     height: 37px;
     
 }
-
 .buy-panel {
     padding-right: 0px;
-    
 }
-
 .name {
     width: 20%!important;
     padding: 14px;
 }
-
 .row-panel:last-child {
     border-bottom-left-radius: 5px!important;
     border-bottom-right-radius: 5px!important;
 }
-
 .quantity-button-panel {
     overflow: hidden;
     text-align: center;
     margin-right: 8%;
     margin-left: 8%;
     width: 50%;
-    
 }
 /* quantity-button-panel child elements */
 .round-button {
@@ -98,12 +90,6 @@
     line-height: 1em; 
 
 }
-
-
-
-
-
-
 
 .green {
     background-color: #21BA45;
