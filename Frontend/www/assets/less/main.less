@@ -1,0 +1,256 @@
+@mainColor: #ea862e;
+
+@import "pizza/pizza-card";
+@import "order";
+
+body{
+    min-width:550px!important;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+}
+
+.discount-bottom {
+    position: fixed;
+    bottom: 0;
+    background: @mainColor;
+    z-index: 99;
+    width: 100px;
+    padding: 10px;
+    color: white;
+    text-transform: uppercase;
+    left: 9px;
+    border-left: 1px solid #d16200;
+    border-right: 1px solid #d16200;
+    text-align: center;
+
+    .discount-title {
+        font-family: Helvetica, Calibri;
+        font-weight: 700;
+        font-size: 15px;
+        border-bottom: 2px dotted #d16301;
+        margin-bottom: 7px;
+        padding-bottom: 3px;
+    }
+
+    .discount-text {
+        font-size: 15px;
+        font-weight: 700;
+    }
+}
+
+.discount-flag {
+    width: 100px;
+    height: 11px;
+    top: -11px;
+    left: -1px;
+    background-image: url(../images/discount.svg);
+    background-size: 100px 11px;
+    background-repeat: no-repeat;
+    padding: 0 !important;
+    margin: 0 !important;
+    position: absolute;
+}
+
+.top-panel {
+    padding-left: 130px;
+    padding-right: 350px;
+    background: rgba(0, 0, 0, .8);
+    z-index: 10;
+
+    .discount-top {
+        position: fixed;
+        top: 0;
+        background: @mainColor;
+        z-index: 99;
+        width: 100px;
+        height: 90px;
+        font-size: 19px;
+        padding: 10px;
+        padding-top: 15px;
+        color: #fff;
+        text-align: center;
+        text-transform: uppercase;
+        left: 9px;
+    }
+
+    .pizza-logo {
+        color: #fff !important;
+        text-decoration: none;
+
+        .title-2{
+            font-size: 27px;
+        }
+    }
+
+    .top-discount {
+        -webkit-transform: scaleY(-1);
+        transform: scaleY(-1);
+        top: 90px;
+        left: 0px;
+    }
+
+    .header-top {
+        width: 100%;
+        font-size: 12px;
+        line-height: 11px;
+        margin: 0;
+        margin-top: 15px;
+        margin-bottom: 10px;
+        border-bottom: 1px solid;
+        color: #a1a1a1;
+
+        .first {
+            font-size: 20px;
+            padding-right: 30px;
+            padding-bottom: 15px;
+        }
+
+        .second {
+            font-size: 12px;
+            padding-right: 30px;
+        }
+
+        .third {
+            font-size: 16px;
+            padding-right: 30px;
+        }
+
+        .sign-in-button {
+            float: right;
+            margin-top: -11px;
+        }
+    }
+
+    .header-bottom {
+        display: block !important;
+        padding-bottom: 10px;
+        font-size: 16px;
+
+        a {
+            color: white;
+        }
+    }
+
+}
+
+.main-container{
+    padding-top: 80px;
+
+    .left-panel{
+        margin: auto;
+        padding-left: 30px;
+        padding-right: 360px;
+        max-width: 1354px;
+
+        .page-title{
+            text-align: center;
+
+            .pizza-count{
+                background-color: @mainColor;
+            }
+        }
+
+        .all-pizza-type-wrap{
+            text-align: center;
+
+            .all-pizza-type{
+                display: inline-block;
+                a {color: @mainColor;}
+
+                .active a{
+                    background-color: @mainColor;
+                    color: white;
+                }
+            }
+        }
+    }
+
+    .right-panel{
+        position: fixed!important;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        padding-top: 35px;
+        margin-left: 20px;
+        padding-right: 0!important;
+        padding-left: 0!important;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        flex-direction: column;
+        min-width: 330px;
+        width: 330px;
+        height: 100%;
+        background: #fff;
+        box-shadow: rgba(0,0,0,.2) -3px 3px 10px;
+        z-index: 1000;
+    }
+}
+
+.right-panel>div{
+    width: 100%;
+    box-sizing: content-box;
+    display: block!important;
+}
+.right-panel{
+
+
+    .r1 {
+        padding-bottom: 13px;
+
+        .order-list-title{
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 17px;
+            padding-left: 15px;
+        }
+
+        .orange{
+            background-color: @mainColor;
+        }
+
+        .clear-order{
+            float: right;
+            margin-top: 5px;
+            cursor: pointer;
+            padding-right: 15px;
+            font-size: 10px;
+            line-height: 11px;
+            font-weight: 400;
+            color: rgba(0,0,0,.5);
+        }
+    }
+
+    .r2{
+        margin-top: 15px;
+        background-color: #F5F5F5;
+        -webkit-box-flex: 1;
+        height: 100%;
+
+    }
+
+    .r3{
+        padding: 10px;
+        border-top: 1px solid rgba(0,0,0,.1);
+
+        .sum-title{
+            font-weight: 700;
+            font-size: 15px;
+            margin-bottom: 15px;
+        }
+
+        .sum-number{
+            font-weight: 700;
+            font-size: 20px;
+            float: right;
+            padding-right: 30px;
+            margin-bottom: 15px;
+        }
+
+        .order-button{
+            padding: 20px;
+            padding-right: 40px;
+        }
+    }
+}

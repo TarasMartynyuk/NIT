@@ -1,0 +1,133 @@
+<% include common/header.ejs %>
+
+
+    <div class="main-container container-fluid">
+        <div class="row">
+            <div class="left-panel">
+                <div class="page-title">
+                    <h2>
+                        <span class="count-tile">Усі</span>
+                        <span class="badge orange pizza-count">8</span>
+                    </h2>
+                </div>
+                <div class="all-pizza-type-wrap">
+                    <ul class="nav nav-pills all-pizza-type">
+                        <li role="presentation" class="active pizza-filter-button" data-pizza-type="any">
+                            <a href="#">
+                                Усі
+                            </a>
+                        </li>
+                        <li role="presentation" class="pizza-filter-button" data-pizza-type="meat">
+                            <a href="#">
+                                Мясні
+                            </a>
+                        </li>
+                        <li role="presentation" class="pizza-filter-button" data-pizza-type='pineapple'>
+                            <a href="#">
+                                З ананасами
+                            </a>
+                        </li>
+                        <li role="presentation" class="pizza-filter-button" data-pizza-type='mushroom'>
+                            <a href="#">
+                                З грибами
+                            </a>
+                        </li>
+                        <li role="presentation" class="pizza-filter-button" data-pizza-type='ocean'>
+                            <a href="#">
+                                З морепродуктами
+                            </a>
+                        </li>
+                        <li role="presentation" class="pizza-filter-button" data-pizza-type="vega">
+                            <a href="#">
+                                Вега
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            <div  class="pizza-list row" id="pizza-list">
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail pizza-card">
+                        <img src="assets/images/pizza_1.jpg">
+
+                        <div class="caption">
+                            <h3>Thumbnail label</h3>
+
+                            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+
+                            <p>
+                                <a href="#" class="btn btn-warning">Купити</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail pizza-card">
+                        <img src="assets/images/pizza_2.jpg">
+
+                        <div class="caption">
+                            <h3>Thumbnail label</h3>
+
+                            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+
+                            <p>
+                                <a href="#" class="btn btn-warning">Купити</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail pizza-card">
+                        <img src="assets/images/pizza_3.jpg">
+
+                        <div class="caption">
+                            <h3>Thumbnail label</h3>
+
+                            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+
+                            <p>
+                                <a href="#" class="btn btn-warning">Купити</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="right-panel">
+                <div class="r1">
+                <span class="order-list-title">
+                    Замовлення
+                    <span class="badge orange orders-count-span" id="order-quantity">0</span>
+                </span>
+
+                    <span class="clear-order">
+                    Очистити замовлення
+                </span>
+
+                </div>
+                <div class="all-orders r2" id="cart"></div>
+
+                <div class="order-state r3">
+                <span class="sum-title" >
+                    Сума замовлення
+                </span>
+                    <span class="sum-number" id="order-sum-bottom" >
+                    145 грн.
+                </span>
+                    <div class="order-button">
+
+                        <a href="./order.html" type="button" class="btn btn-warning btn-lg btn-block button-order" id="order-button">
+                            Замовити
+                        </a>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+<% include common/footer.ejs %>
+

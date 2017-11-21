@@ -1,0 +1,82 @@
+<% include common/header.ejs %>
+
+<div class="main-container container-fluid">
+    <div class="row order-page">
+        <div class="left-panel">
+            <div class="contact-form">
+                <div class="form-description">1. Контактні дані</div>
+                <div class="row">
+                    <div class="col-md-7">
+                        <form id=class="form-horizontal" role="form" >
+
+                            <div class="form-group">
+                                    <label for="inputName">Ім'я</label>
+                                    <input class="form-control" id="inputName" type="text"  required placeholder="Ім'я Прізвище" pattern"(^[А-ЯA-Za-zа-я]+)( [А-ЯA-Za-zа-я]+$){0,1}">
+                                    <div class="help-block with-errors">Введіть Ім'я та Прізвище</div>
+                            </div>
+
+                            <div class="form-group">
+                                        <label for="inputNumber">Телефон</label>
+                                        <input class="form-control" id="inputNumber" type="text"  required placeholder="+380..." pattern="\+380([0-9]){9}$">
+                                        <div class="help-block with-errors">Введіть номер телефону</div>
+                            </div>
+
+                            <div class="form-group">
+                                        <label for="inputAdress">Адреса</label>
+                                        <input class="form-control" id="inputAdress" type="text"  required placeholder="Київ, вул. Спаська, 2" pattern="+380[0-9]{9}">
+                                        <div class="help-block with-errors">Введіть адресу</div>
+                            </div>
+                            
+
+                        </form>
+
+
+
+                    </div>
+                    <div class="col-md-5 summary">
+                        <div class="bs-callout bs-callout-warning">
+                            <h4>Інформація про замовлення</h4>
+                            <p class="order-summary-time"><b>Приблизний час доставки:</b> невідомий</p>
+                            <p class="order-summary-address"><b>Адреса доставки:</b> невідома</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row"></div>
+            </div>
+            <div class="google-maps" id="googleMap" style="position: relative; overflow: hidden;"></div>
+        </div>
+    </div>
+    <div class="right-panel">
+        <div class="r1">
+                <span class="order-list-title">
+                    Замовлення
+                    <span class="badge orange orders-count-span" id="order-quantity">0</span>
+                </span>
+
+            <span class="clear-order">
+                    Очистити замовлення
+                </span>
+
+        </div>
+        <div class="all-orders r2" id="cart"></div>
+
+        <div class="order-state r3">
+                <span class="sum-title" style="display:none">
+                    Сума замовлення
+                </span>
+            <span class="sum-number" id="order-sum-bottom" style="display:none">
+                    145 грн.
+                </span>
+            <div class="order-button">
+
+                <button type="button" class="btn btn-default btn-lg btn-block button-order">
+                    Редагувати замовлення
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<% include common/footer.ejs %>
