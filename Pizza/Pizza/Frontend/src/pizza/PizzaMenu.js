@@ -8,7 +8,6 @@ var PizzaCart = require('./PizzaCart');
 var Pizza_List = require('./Pizza_List');
 var PizzaType = require('./PizzaType');
 
-
 //HTML елемент куди будуть додаватися піци
 var $pizza_list = $("#pizza-list");
 
@@ -48,8 +47,15 @@ function filterPizza(filter) {
     //Масив куди потраплять піци які треба показати
     var pizza_shown = [];
 
-    Pizza_List.forEach( pizza => {
-        if(pizza.type.includes(filter)){
+
+    Pizza_List.forEach( function(pizza) {
+        if(filter in pizza.content){
+            pizza_shown.push(pizza);
+        }
+    });
+
+    Pizza_List.forEach( function(pizza) {
+        if(!(PizzaType.Meat in pizza.content) && !(PizzaType.Ocean in pizza.content) && filter==PizzaType.Vega){
             pizza_shown.push(pizza);
         }
     });
@@ -68,8 +74,8 @@ function initialiseMenu() {
     type_list = type_header.find('li').toArray();
 
     // console.log($(type_list[0]).attr('data-pizza-type'));
-    type_list.forEach( button => {
-        $(button).click( () => {
+    type_list.forEach( function(button) {
+        $(button).click( function() {
             button_node = $(button);
             buttons_filter = button_node.attr('data-pizza-type');
             var pizzas_shown_number = filterPizza(buttons_filter);

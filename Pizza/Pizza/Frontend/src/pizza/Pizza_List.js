@@ -2,18 +2,15 @@
  * Created by diana on 12.01.16.
  */
 
-var PizzaType = require('./PizzaType');
-
-// that's those obscure pizza objects! Curse you, loose typed languages!
 var pizza_info = [
     {
         id:1,
         icon:'assets/images/pizza_7.jpg',
         title: "Імпреза",
-        type: [PizzaType.Meat, PizzaType.Pineapple],
+        type: 'М’ясна піца',
         content: {
             meat: ['балик', 'салямі'],
-            chicken: ['курка'],
+            chicken: ['куриця'],
             cheese: ['сир моцарелла', 'сир рокфорд'],
             pineapple: ['ананаси'],
             additional: ['томатна паста', 'петрушка']
@@ -36,7 +33,7 @@ var pizza_info = [
         id:2,
         icon:'assets/images/pizza_2.jpg',
         title: "BBQ",
-        type: [PizzaType.Meat, PizzaType.Mushrooms],
+        type: 'М’ясна піца',
         content: {
             meat: ['мисливські ковбаски', 'ковбаски папероні', 'шинка'],
             cheese: ['сир домашній'],
@@ -59,7 +56,7 @@ var pizza_info = [
         id:3,
         icon:'assets/images/pizza_1.jpg',
         title: "Міксовий поло",
-        type: [PizzaType.Meat, PizzaType.Pineapple],
+        type: 'М’ясна піца',
         content: {
             meat: ['вітчина', 'куриця копчена'],
             cheese: ['сир моцарелла'],
@@ -81,7 +78,7 @@ var pizza_info = [
         id:4,
         icon:'assets/images/pizza_5.jpg',
         title: "Сициліано",
-        type: [PizzaType.Meat, PizzaType.Mushrooms],
+        type: 'М’ясна піца',
         content: {
             meat: ['вітчина', 'салямі'],
             cheese: ['сир моцарелла'],
@@ -103,7 +100,7 @@ var pizza_info = [
         id:17,
         icon:'assets/images/pizza_3.jpg',
         title: "Маргарита",
-        type: [PizzaType.Vega],
+        type: 'Вега піца',
         content: {
             cheese: ['сир моцарелла', 'сир домашній'],
             tomato: ['помідори'],
@@ -119,7 +116,7 @@ var pizza_info = [
         id:43,
         icon:'assets/images/pizza_6.jpg',
         title: "Мікс смаків",
-        type: [PizzaType.Meat, PizzaType.Mushrooms, PizzaType.Pineapple],
+        type: 'М’ясна піца',
         content: {
             meat: ['ковбаски'],
             cheese: ['сир моцарелла'],
@@ -142,7 +139,7 @@ var pizza_info = [
         id:90,
         icon:'assets/images/pizza_8.jpg',
         title: "Дольче Маре",
-        type: PizzaType.Marine,
+        type: 'Морська піца',
         content: {
             ocean: ['криветки тигрові', 'мідії', 'ікра червона', 'філе червоної риби'],
             cheese: ['сир моцарелла'],
@@ -158,7 +155,7 @@ var pizza_info = [
         id:6,
         icon:'assets/images/pizza_4.jpg',
         title: "Россо Густо",
-        type: [PizzaType.Marine],
+        type: 'Морська піца',
         content: {
             ocean: ['ікра червона', 'лосось копчений'],
             cheese: ['сир моцарелла'],

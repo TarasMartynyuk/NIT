@@ -1,8 +1,8 @@
 var PizzaType = {
+    Mushroom : 'mushroom',
+    Ocean : 'ocean',
     Meat : 'meat',
     Pineapple : 'pineapple',
-    Mushrooms : 'mushrooms',
-    Marine : 'marine',
     Vega : 'vega',
     Any : 'any'
 }
