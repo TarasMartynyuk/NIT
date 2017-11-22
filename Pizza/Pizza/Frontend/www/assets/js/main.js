@@ -2,70 +2,187 @@
 // all JS for order page
 
 //#region validation funcs
-// function isNameValid(inputed_name)
-// {
-//     return new RegExp("^([А-ЯA-Za-zа-яіІЩщїЇєЄ]+)( [А-ЯA-Za-zа-яіІЩщїЇєЄ]+){0,1}$").
-//         test(inputed_name);
-//     // ([А-ЯA-Za-zа-яіІЩщїЇєЄ]+)( [А-ЯA-Za-zа-яіІЩщїЇєЄ]+){0,1}$
-// }
+function isNameValid(inputed_name)
+{
+    return new RegExp("^([А-ЯA-Za-zа-яіІЩщїЇєЄ]+)( [А-ЯA-Za-zа-яіІЩщїЇєЄ]+){0,1}$").
+        test(inputed_name);
+    // ([А-ЯA-Za-zа-яіІЩщїЇєЄ]+)( [А-ЯA-Za-zа-яіІЩщїЇєЄ]+){0,1}$
+}
 
-// function isNumberValid(inputed_number)
-// {
-//     return new RegExp("^\\+380[0-9]{9}$").
-//         test(inputed_number);
-// }
+function isNumberValid(inputed_number)
+{
+    return new RegExp("^\\+380[0-9]{9}$").
+        test(inputed_number);
+}
 
-// function testValidity(input_el, validity_func){
-//     if(validity_func(input_el.val())) {
-//         input_el.removeClass('input-invalid');            
-//         input_el.addClass('input-valid');
-//     } else {
-//         input_el.removeClass('input-valid');            
-//         input_el.addClass('input-invalid');
-//     }
-// }
+function testValidity(input_el, validation_func){
+    if(validation_func(input_el.val())) {
+        input_el.removeClass('input-invalid');            
+        input_el.addClass('input-valid');
+        // hide error tip
+        input_el.closest('.form-group').find('.help-block.with-errors.error-text').css('display', 'none');
+    } else {
+        input_el.removeClass('input-valid');            
+        input_el.addClass('input-invalid');
+    }
+}
+
+// returns true if error was shown
+function showErrorIfInvalid(input_el, validation_func){
+    var parent_form = input_el.closest('.form-group');
+    var passed_validation = validation_func(parent_form.find('input').val());
+
+    if(passed_validation == false){
+        parent_form.find('.help-block.with-errors.error-text').css('display', 'block');
+        input_el.removeClass('input-valid');            
+        input_el.addClass('input-invalid');
+    }
+    return !passed_validation;
+}
 
 //#endregion
 
 // adds order-page specific controls
 function initOrderPage(){
-    console.log('initOrder');
     // every time user leave's the input field, check if passed validation
     // and style it accordingly
-    // $('#inputName').on('input', () => {
-    //     testValidity($(event.target), isNameValid);
-    // });
+    $('#inputName').on('input', () => {
+        testValidity($(event.target), isNameValid);
+    });
 
-    // $('#inputNumber').on('input', () => {
-    //     testValidity($(event.target), isNumberValid);
-    // });
+    $('#inputNumber').on('input', () => {
+        testValidity($(event.target), isNumberValid);
+    });
     
-
-
-    // ^\\+380[0-9]{9}$
-
 
     // TODO: adress validation
 
-    $('input[required]').on('invalid', function() {
-        this.setCustomValidity("");
-        if (!this.validity.valid) {
-            this.setCustomValidity($(this).data("required-message"));
-        }
-    });
-    // $('input[required]').on('invalid', function() {
-    //     this.setCustomValidity("text");
-    //     // $(this).data("required-message")
-    // });
-    // when submit button is clicked, check if all 3 inputs
-    // are valid, if so - proceed, else show errors for those that are not
-    $("button[type='submit']").click(() => {
-        console.log('clc');
+
+    $('#submitButton').click(() => {
+        showErrorIfInvalid($('#inputName'), isNameValid);
+        showErrorIfInvalid($('#inputNumber'), isNumberValid);
+        
     });
 }
 
 exports.initOrderPage = initOrderPage;
 },{}],2:[function(require,module,exports){
+
+var markerClicked;
+var curAdress;
+var curTime;
+
+function initialiseMap() {
+    console.log('map');
+    //Тут починаємо працювати з картою
+    var mapProp = {
+        center: new google.maps.LatLng(50.464379, 30.519131),
+        zoom: 15
+    };
+    var html_element = document.getElementById("googleMap");
+    var map = new google.maps.Map(html_element, mapProp);
+    //Карта створена і показана
+
+    var directionsDisplay = new google.maps.DirectionsRenderer();
+    directionsDisplay.setMap(map);
+    directionsDisplay.setOptions( { suppressMarkers: true, suppressInfoWindows: true } );
+
+    var point = new google.maps.LatLng(50.464379, 30.519131);
+    var marker = new google.maps.Marker({
+        position: point,
+        map: map,
+        icon: "assets/images/map-icon.png"
+    });
+
+    google.maps.event.addDomListener(window, 'load', initialiseMap);
+
+    google.maps.event.addListener(map, 'click', function (me) {
+        var coordinates = me.latLng;
+    });
+
+    google.maps.event.addListener(map, 'click', function (me) {
+        var coordinates = me.latLng;
+        geocodeLatLng(coordinates, function (err, adress) {
+            if (!err) {
+                //Дізналися адресу
+                //console.log(adress);
+                curAdress=adress;
+                $('.order-summary-address').html("<b>Адреса доставки:</b> "+curAdress);
+                $('#inputAddress').val(curAdress);
+                var pointClicked = coordinates;
+                if (markerClicked!=null) markerClicked.setMap(null);
+                markerClicked = new google.maps.Marker({
+                    position: pointClicked,
+                    map: map,
+                    icon: "assets/images/home-icon.png"
+                });
+            } else {
+                console.log("Немає адреси")
+            }
+        })
+        calculateRoute(point,coordinates, function (err, response) {
+            if (!err) {
+                // var res=leg;
+                // console.log(leg.duration.text);
+                directionsDisplay.setDirections(response);
+                //console.log(response.routes[0].legs[0].duration.text);
+                curTime=response.routes[0].legs[0].duration.text;
+                $('.order-summary-time').html("<b>Приблизний час доставки:</b> "+curTime);
+            } else {
+                console.log("Помилка")
+            }
+        })
+
+
+    });
+}
+
+function geocodeLatLng(latlng, callback) {
+//Модуль за роботу з адресою
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode({'location': latlng}, function (results, status) {
+        if (status === google.maps.GeocoderStatus.OK && results[1]) {
+            var adress = results[1].formatted_address;
+            callback(null, adress);
+        } else {
+            callback(new Error("Can't	find	adress"));
+        }
+    });
+}
+
+
+
+function geocodeAddress(address, callback) {
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode({'address': address}, function (results, status) {
+        if (status === google.maps.GeocoderStatus.OK && results[0]) {
+            var coordinates = results[0].geometry.location;
+            callback(null, coordinates);
+        } else {
+            callback(new Error("Can	not	find	the	adress"));
+        }
+    });
+}
+
+function calculateRoute(A_latlng, B_latlng, callback) {
+    var directionService = new google.maps.DirectionsService();
+    directionService.route({
+        origin: A_latlng,
+        destination: B_latlng,
+        travelMode: google.maps.TravelMode["DRIVING"]
+    }, function (response, status) {
+        if (status == google.maps.DirectionsStatus.OK) {
+            // var leg = response.routes[0].legs[0];
+            // {duration: leg.duration}
+            callback(null, response);
+        } else {
+            callback(new Error("Can'	not	find	direction"));
+        }
+    });
+}
+
+exports.initialiseMap = initialiseMap;
+},{}],3:[function(require,module,exports){
 /**
  * Created by chaika on 02.02.16.
  */
@@ -76,7 +193,7 @@ exports.PizzaMenu_OneItem = ejs.compile("<%\r\nfunction getIngredientsArray(pizz
 
 exports.PizzaCart_OneItem = ejs.compile("\r\n\r\n\r\n<div class=\"cart-pizza ng-scope\">\r\n    <img class=\"img-aside pizza-icon\" alt=\"Піца\" src=\"<%= pizza.icon %>\">\r\n    <p class=\"bold mb10 ng-scope\">\r\n        <span class=\"order-title\"><%= pizza.title %> (<%= size_string %>)</span>\r\n    </p>\r\n    <div class=\"order-text\">\r\n        <img class=\"diagonal-image\" src=\"assets/images/size-icon.svg\">\r\n        <span class=\"diagonal\"><%= pizza[size].size %></span>\r\n        <img class=\"gram-image\" src=\"assets/images/weight.svg\">\r\n        <span class=\"gram\"><%= pizza[size].weight %></span>\r\n    </div>\r\n    <div class=\"price-box\">\r\n        <span class=\"price\"><%= pizza[size].price * quantity %> грн</span>\r\n        <a class=\"minus btn btn-xs btn-danger btn-circle\" href=\"#\">\r\n            <i class=\"glyphicon glyphicon-minus icon-white\">\r\n            </i>\r\n        </a>\r\n        <span class=\"label order-pizza-count\" style=\"color:black;\"><%= quantity %></span>\r\n        <button class=\"plus btn btn-xs btn-success btn-circle\">\r\n            <i class=\"glyphicon glyphicon-plus icon-white\">\r\n\r\n            </i>\r\n        </button>\r\n        <button class=\"cart-delete btn btn-xs btn-default btn-circle\">\r\n            <i class=\"glyphicon glyphicon-remove icon-white\">\r\n\r\n            </i>\r\n        </button>\r\n    </div>\r\n</div>\r\n");
 
-},{"ejs":11}],3:[function(require,module,exports){
+},{"ejs":12}],4:[function(require,module,exports){
 var basil =	require('basil.js'); 
 
 basil = new	basil();
@@ -89,7 +206,7 @@ exports.get = function(key)	{
 exports.set = function(key,	value){ 
     return	basil.set(key,	value); 
 }
-},{"basil.js":9}],4:[function(require,module,exports){
+},{"basil.js":10}],5:[function(require,module,exports){
 /**
  * Created by chaika on 25.01.16.
  */
@@ -99,11 +216,13 @@ $(function(){
     var PizzaMenu = require('./pizza/PizzaMenu');
     var PizzaCart = require('./pizza/PizzaCart');
     var Order = require('./Order');
+    var Maps = require('./OrderGoogleMaps');
     // var Pizza_List = require('./Pizza_List');
 
     PizzaCart.initialiseCart();
     PizzaMenu.initialiseMenu();
     Order.initOrderPage();
+    Maps.initialiseMap();
 
     // form = $('form-horizontal').find('.form-control');
     // form = $('.form-horizontal ').find('.form-control');
@@ -115,7 +234,7 @@ $(function(){
 
 
 
-},{"./Order":1,"./pizza/PizzaCart":5,"./pizza/PizzaMenu":6}],5:[function(require,module,exports){
+},{"./Order":1,"./OrderGoogleMaps":2,"./pizza/PizzaCart":6,"./pizza/PizzaMenu":7}],6:[function(require,module,exports){
 /**
  * Created by chaika on 02.02.16.
  */
@@ -324,7 +443,7 @@ exports.initialiseCart = initialiseCart;
 
 exports.PizzaSize = PizzaSize;
 //#endregion
-},{"../Templates":2,"../localStorage.js":3}],6:[function(require,module,exports){
+},{"../Templates":3,"../localStorage.js":4}],7:[function(require,module,exports){
 // import { filter } from './C:/Users/taras/AppData/Local/Microsoft/TypeScript/2.6/node_modules/@types/ejs';
 
 /**
@@ -421,7 +540,7 @@ function initialiseMenu() {
 exports.filterPizza = filterPizza;
 exports.initialiseMenu = initialiseMenu;
 
-},{"../Templates":2,"./PizzaCart":5,"./PizzaType":7,"./Pizza_List":8}],7:[function(require,module,exports){
+},{"../Templates":3,"./PizzaCart":6,"./PizzaType":8,"./Pizza_List":9}],8:[function(require,module,exports){
 var PizzaType = {
     Mushroom : 'mushroom',
     Ocean : 'ocean',
@@ -433,10 +552,12 @@ var PizzaType = {
 
 module.exports = PizzaType;
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 /**
  * Created by diana on 12.01.16.
  */
+// AIzaSyAXiSDpNlMqrwJ57A9NEw_H6AYrPO0HJ0o
+
 
 var pizza_info = [
     {
@@ -611,7 +732,7 @@ var pizza_info = [
 ];
 
 module.exports = pizza_info;
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 (function () {
 	// Basil
 	var Basil = function (options) {
@@ -999,9 +1120,9 @@ module.exports = pizza_info;
 
 })();
 
-},{}],10:[function(require,module,exports){
-
 },{}],11:[function(require,module,exports){
+
+},{}],12:[function(require,module,exports){
 /*
  * EJS Embedded JavaScript templates
  * Copyright 2112 Matthew Eernisse (mde@fleegix.org)
@@ -1869,7 +1990,7 @@ if (typeof window != 'undefined') {
   window.ejs = exports;
 }
 
-},{"../package.json":13,"./utils":12,"fs":10,"path":14}],12:[function(require,module,exports){
+},{"../package.json":14,"./utils":13,"fs":11,"path":15}],13:[function(require,module,exports){
 /*
  * EJS Embedded JavaScript templates
  * Copyright 2112 Matthew Eernisse (mde@fleegix.org)
@@ -2035,7 +2156,7 @@ exports.cache = {
   }
 };
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 module.exports={
   "_args": [
     [
@@ -2119,7 +2240,7 @@ module.exports={
   "version": "2.5.7"
 }
 
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 (function (process){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -2347,7 +2468,7 @@ var substr = 'ab'.substr(-1) === 'b'
 ;
 
 }).call(this,require('_process'))
-},{"_process":15}],15:[function(require,module,exports){
+},{"_process":16}],16:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -2533,4 +2654,4 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}]},{},[4]);
+},{}]},{},[5]);
