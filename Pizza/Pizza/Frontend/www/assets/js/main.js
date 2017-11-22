@@ -1,4 +1,71 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+// all JS for order page
+
+//#region validation funcs
+// function isNameValid(inputed_name)
+// {
+//     return new RegExp("^([А-ЯA-Za-zа-яіІЩщїЇєЄ]+)( [А-ЯA-Za-zа-яіІЩщїЇєЄ]+){0,1}$").
+//         test(inputed_name);
+//     // ([А-ЯA-Za-zа-яіІЩщїЇєЄ]+)( [А-ЯA-Za-zа-яіІЩщїЇєЄ]+){0,1}$
+// }
+
+// function isNumberValid(inputed_number)
+// {
+//     return new RegExp("^\\+380[0-9]{9}$").
+//         test(inputed_number);
+// }
+
+// function testValidity(input_el, validity_func){
+//     if(validity_func(input_el.val())) {
+//         input_el.removeClass('input-invalid');            
+//         input_el.addClass('input-valid');
+//     } else {
+//         input_el.removeClass('input-valid');            
+//         input_el.addClass('input-invalid');
+//     }
+// }
+
+//#endregion
+
+// adds order-page specific controls
+function initOrderPage(){
+    console.log('initOrder');
+    // every time user leave's the input field, check if passed validation
+    // and style it accordingly
+    // $('#inputName').on('input', () => {
+    //     testValidity($(event.target), isNameValid);
+    // });
+
+    // $('#inputNumber').on('input', () => {
+    //     testValidity($(event.target), isNumberValid);
+    // });
+    
+
+
+    // ^\\+380[0-9]{9}$
+
+
+    // TODO: adress validation
+
+    $('input[required]').on('invalid', function() {
+        this.setCustomValidity("");
+        if (!this.validity.valid) {
+            this.setCustomValidity($(this).data("required-message"));
+        }
+    });
+    // $('input[required]').on('invalid', function() {
+    //     this.setCustomValidity("text");
+    //     // $(this).data("required-message")
+    // });
+    // when submit button is clicked, check if all 3 inputs
+    // are valid, if so - proceed, else show errors for those that are not
+    $("button[type='submit']").click(() => {
+        console.log('clc');
+    });
+}
+
+exports.initOrderPage = initOrderPage;
+},{}],2:[function(require,module,exports){
 /**
  * Created by chaika on 02.02.16.
  */
@@ -9,7 +76,7 @@ exports.PizzaMenu_OneItem = ejs.compile("<%\r\nfunction getIngredientsArray(pizz
 
 exports.PizzaCart_OneItem = ejs.compile("\r\n\r\n\r\n<div class=\"cart-pizza ng-scope\">\r\n    <img class=\"img-aside pizza-icon\" alt=\"Піца\" src=\"<%= pizza.icon %>\">\r\n    <p class=\"bold mb10 ng-scope\">\r\n        <span class=\"order-title\"><%= pizza.title %> (<%= size_string %>)</span>\r\n    </p>\r\n    <div class=\"order-text\">\r\n        <img class=\"diagonal-image\" src=\"assets/images/size-icon.svg\">\r\n        <span class=\"diagonal\"><%= pizza[size].size %></span>\r\n        <img class=\"gram-image\" src=\"assets/images/weight.svg\">\r\n        <span class=\"gram\"><%= pizza[size].weight %></span>\r\n    </div>\r\n    <div class=\"price-box\">\r\n        <span class=\"price\"><%= pizza[size].price * quantity %> грн</span>\r\n        <a class=\"minus btn btn-xs btn-danger btn-circle\" href=\"#\">\r\n            <i class=\"glyphicon glyphicon-minus icon-white\">\r\n            </i>\r\n        </a>\r\n        <span class=\"label order-pizza-count\" style=\"color:black;\"><%= quantity %></span>\r\n        <button class=\"plus btn btn-xs btn-success btn-circle\">\r\n            <i class=\"glyphicon glyphicon-plus icon-white\">\r\n\r\n            </i>\r\n        </button>\r\n        <button class=\"cart-delete btn btn-xs btn-default btn-circle\">\r\n            <i class=\"glyphicon glyphicon-remove icon-white\">\r\n\r\n            </i>\r\n        </button>\r\n    </div>\r\n</div>\r\n");
 
-},{"ejs":10}],2:[function(require,module,exports){
+},{"ejs":11}],3:[function(require,module,exports){
 var basil =	require('basil.js'); 
 
 basil = new	basil();
@@ -22,7 +89,7 @@ exports.get = function(key)	{
 exports.set = function(key,	value){ 
     return	basil.set(key,	value); 
 }
-},{"basil.js":8}],3:[function(require,module,exports){
+},{"basil.js":9}],4:[function(require,module,exports){
 /**
  * Created by chaika on 25.01.16.
  */
@@ -31,23 +98,24 @@ $(function(){
     //This code will execute when the page is ready
     var PizzaMenu = require('./pizza/PizzaMenu');
     var PizzaCart = require('./pizza/PizzaCart');
+    var Order = require('./Order');
     // var Pizza_List = require('./Pizza_List');
 
     PizzaCart.initialiseCart();
     PizzaMenu.initialiseMenu();
-
+    Order.initOrderPage();
 
     // form = $('form-horizontal').find('.form-control');
-    form = $('.form-horizontal ').find('.form-control');
-    form.focusout(function(){
-        $(this).addClass('touched');
-    });
+    // form = $('.form-horizontal ').find('.form-control');
+    // form.focusout(function(){
+    //     $(this).addClass('touched');
+    // });
 
 });
 
 
 
-},{"./pizza/PizzaCart":4,"./pizza/PizzaMenu":5}],4:[function(require,module,exports){
+},{"./Order":1,"./pizza/PizzaCart":5,"./pizza/PizzaMenu":6}],5:[function(require,module,exports){
 /**
  * Created by chaika on 02.02.16.
  */
@@ -256,7 +324,7 @@ exports.initialiseCart = initialiseCart;
 
 exports.PizzaSize = PizzaSize;
 //#endregion
-},{"../Templates":1,"../localStorage.js":2}],5:[function(require,module,exports){
+},{"../Templates":2,"../localStorage.js":3}],6:[function(require,module,exports){
 // import { filter } from './C:/Users/taras/AppData/Local/Microsoft/TypeScript/2.6/node_modules/@types/ejs';
 
 /**
@@ -353,7 +421,7 @@ function initialiseMenu() {
 exports.filterPizza = filterPizza;
 exports.initialiseMenu = initialiseMenu;
 
-},{"../Templates":1,"./PizzaCart":4,"./PizzaType":6,"./Pizza_List":7}],6:[function(require,module,exports){
+},{"../Templates":2,"./PizzaCart":5,"./PizzaType":7,"./Pizza_List":8}],7:[function(require,module,exports){
 var PizzaType = {
     Mushroom : 'mushroom',
     Ocean : 'ocean',
@@ -365,7 +433,7 @@ var PizzaType = {
 
 module.exports = PizzaType;
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 /**
  * Created by diana on 12.01.16.
  */
@@ -543,7 +611,7 @@ var pizza_info = [
 ];
 
 module.exports = pizza_info;
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 (function () {
 	// Basil
 	var Basil = function (options) {
@@ -931,9 +999,9 @@ module.exports = pizza_info;
 
 })();
 
-},{}],9:[function(require,module,exports){
-
 },{}],10:[function(require,module,exports){
+
+},{}],11:[function(require,module,exports){
 /*
  * EJS Embedded JavaScript templates
  * Copyright 2112 Matthew Eernisse (mde@fleegix.org)
@@ -1801,7 +1869,7 @@ if (typeof window != 'undefined') {
   window.ejs = exports;
 }
 
-},{"../package.json":12,"./utils":11,"fs":9,"path":13}],11:[function(require,module,exports){
+},{"../package.json":13,"./utils":12,"fs":10,"path":14}],12:[function(require,module,exports){
 /*
  * EJS Embedded JavaScript templates
  * Copyright 2112 Matthew Eernisse (mde@fleegix.org)
@@ -1967,7 +2035,7 @@ exports.cache = {
   }
 };
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 module.exports={
   "_args": [
     [
@@ -2051,7 +2119,7 @@ module.exports={
   "version": "2.5.7"
 }
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 (function (process){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -2279,7 +2347,7 @@ var substr = 'ab'.substr(-1) === 'b'
 ;
 
 }).call(this,require('_process'))
-},{"_process":14}],14:[function(require,module,exports){
+},{"_process":15}],15:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -2465,4 +2533,4 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}]},{},[3]);
+},{}]},{},[4]);
