@@ -11,6 +11,13 @@ $(function(){
     PizzaCart.initialiseCart();
     PizzaMenu.initialiseMenu();
 
+
+    // form = $('form-horizontal').find('.form-control');
+    form = $('.form-horizontal ').find('.form-control');
+    form.focusout(function(){
+        $(this).addClass('touched');
+    });
+
 });
 
 

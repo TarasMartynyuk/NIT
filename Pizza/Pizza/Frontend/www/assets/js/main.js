@@ -36,6 +36,13 @@ $(function(){
     PizzaCart.initialiseCart();
     PizzaMenu.initialiseMenu();
 
+
+    // form = $('form-horizontal').find('.form-control');
+    form = $('.form-horizontal ').find('.form-control');
+    form.focusout(function(){
+        $(this).addClass('touched');
+    });
+
 });
 
 
@@ -146,7 +153,6 @@ function sizeToString(size){
 function initialiseCart() {
     //Фукнція віпрацьвуватиме при завантаженні сторінки
     //Тут можна наприклад, зчитати вміст корзини який збережено в Local Storage то показати його
-    console.log('init');
     var saved_cart = localStorage.get('cart');
     var saved_sum = localStorage.get('sum');
     var saved_quantity = localStorage.get('quantity');
