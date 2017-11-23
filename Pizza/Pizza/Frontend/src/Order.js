@@ -1,5 +1,5 @@
 // all JS for order page
-
+var API = require('./API');
 //#region validation funcs
 function isNameValid(inputed_name)
 {
@@ -26,7 +26,8 @@ function testValidity(input_el, validation_func){
     }
 }
 
-// returns true if error was shown
+// returns number of errors occured while validating an element
+// and shows needed error tips
 function showErrorIfInvalid(input_el, validation_func){
     var parent_form = input_el.closest('.form-group');
     var passed_validation = validation_func(parent_form.find('input').val());
@@ -36,7 +37,7 @@ function showErrorIfInvalid(input_el, validation_func){
         input_el.removeClass('input-valid');            
         input_el.addClass('input-invalid');
     }
-    return !passed_validation;
+    return passed_validation ? 0 : 1;
 }
 
 //#endregion
@@ -58,9 +59,27 @@ function initOrderPage(){
 
 
     $('#submitButton').click(() => {
-        showErrorIfInvalid($('#inputName'), isNameValid);
-        showErrorIfInvalid($('#inputNumber'), isNumberValid);
-        
+        var num_errors = 0;
+        num_errors += showErrorIfInvalid($('#inputName'), isNameValid);
+        num_errors += showErrorIfInvalid($('#inputNumber'), isNumberValid);
+        // TODO: check adress field here
+
+        if(num_errors == 0) {
+            var order_data = {
+                name : $('#inputName').val(),
+                number : $('#inputNumber').val(),
+                adress : $('#inputAdress').val()
+            }
+            // console.log(order_data);
+            API.createOrder(order_data, (err, data) =>{
+                if(err){
+                    console.error('server returned error');
+                } else {
+                    console.log('server returned success');
+                    // console.log(data);
+                }
+            });
+        }
     });
 }
 

@@ -5,11 +5,12 @@
  */
 var Templates = require('../Templates');
 var PizzaCart = require('./PizzaCart');
-var Pizza_List = require('./Pizza_List');
+// var Pizza_List = require('./Pizza_List');
 var PizzaType = require('./PizzaType');
-
+var API = require('../API');
 //HTML елемент куди будуть додаватися піци
 var $pizza_list = $("#pizza-list");
+var Pizza_List;
 
 // argument is a list of "pizza" objects
 function showPizzaList(list) {
@@ -66,8 +67,16 @@ function filterPizza(filter) {
 }
 
 function initialiseMenu() {
-    //Показуємо усі піци
-    filterPizza(PizzaType.Any);
+    // get pizza list from server 
+    API.getPizzaList((err, user_data) => {
+        if(err){
+            console.error('Could not get PizzaList from server');
+        } else {
+            Pizza_List = user_data;
+            //Показуємо усі піци
+            filterPizza(PizzaType.Any);
+        }
+    });
 
     //type filter events
     type_header = $('.all-pizza-type-wrap');

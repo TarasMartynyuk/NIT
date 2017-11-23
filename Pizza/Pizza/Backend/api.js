@@ -8,10 +8,11 @@ exports.getPizzaList = function(req, res) {
 };
 
 exports.createOrder = function(req, res) {
-    var order_info = req.body;
     console.log("Creating Order", order_info);
+    var order_info = req.body;
 
     res.send({
-        success: true
+        // success: true,
+        order : order_info,
     });
 };

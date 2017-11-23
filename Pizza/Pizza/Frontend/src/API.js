@@ -17,18 +17,20 @@ function backendGet(url, callback) {
 }
 
 function backendPost(url, data, callback) {
+    // console.log(data);
     $.ajax({
         url: API_URL + url,
         type: 'POST',
         contentType : 'application/json',
         data: JSON.stringify(data),
         success: function(data){
+            console.log(data);
             callback(null, data);
         },
-        error: function() {
+        error: function(){
             callback(new Error("Ajax Failed"));
         }
-    })
+    });
 }
 
 exports.getPizzaList = function(callback) {
