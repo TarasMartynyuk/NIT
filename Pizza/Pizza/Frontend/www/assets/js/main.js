@@ -25,13 +25,13 @@ function backendPost(url, data, callback) {
         contentType : 'application/json',
         data: JSON.stringify(data),
         success: function(data){
-            console.log(data);
             callback(null, data);
         },
         error: function(){
             callback(new Error("Ajax Failed"));
         }
     });
+
 }
 
 exports.getPizzaList = function(callback) {
@@ -45,18 +45,31 @@ exports.createOrder = function(order_info, callback) {
 },{}],2:[function(require,module,exports){
 // all JS for order page
 var API = require('./API');
+var MapApi = require('./OrderGoogleMaps')
+
 //#region validation funcs
-function isNameValid(inputed_name)
-{
+function isNameValid(inputed_name){
     return new RegExp("^([А-ЯA-Za-zа-яіІЩщїЇєЄ]+)( [А-ЯA-Za-zа-яіІЩщїЇєЄ]+){0,1}$").
         test(inputed_name);
     // ([А-ЯA-Za-zа-яіІЩщїЇєЄ]+)( [А-ЯA-Za-zа-яіІЩщїЇєЄ]+){0,1}$
 }
 
-function isNumberValid(inputed_number)
-{
-    return new RegExp("^\\+380[0-9]{9}$").
+function isNumberValid(inputed_number){
+    return new RegExp("^(\\+38){0,1}0[0-9]{9}$").
         test(inputed_number);
+}
+
+function validateAdress(adress_node, inputed_adress){
+    
+    MapApi.geocodeAddress(adress_node.val(), (err, coordinates) => {
+        if(err){
+            adress_node.removeClass('input-valid');            
+            adress_node.addClass('input-invalid');
+        } else {
+            adress_node.removeClass('input-invalid');            
+            adress_node.addClass('input-valid');
+        }
+    });
 }
 
 function testValidity(input_el, validation_func){
@@ -64,7 +77,7 @@ function testValidity(input_el, validation_func){
         input_el.removeClass('input-invalid');            
         input_el.addClass('input-valid');
         // hide error tip
-        input_el.closest('.form-group').find('.help-block.with-errors.error-text').css('display', 'none');
+        errorTipSetActive(input_el, false);
     } else {
         input_el.removeClass('input-valid');            
         input_el.addClass('input-invalid');
@@ -74,18 +87,41 @@ function testValidity(input_el, validation_func){
 // returns number of errors occured while validating an element
 // and shows needed error tips
 function showErrorIfInvalid(input_el, validation_func){
-    var parent_form = input_el.closest('.form-group');
-    var passed_validation = validation_func(parent_form.find('input').val());
+    var passed_validation = validation_func(input_el.closest('.form-group').find('input').val());
 
     if(passed_validation == false){
-        parent_form.find('.help-block.with-errors.error-text').css('display', 'block');
-        input_el.removeClass('input-valid');            
-        input_el.addClass('input-invalid');
+        errorTipSetActive(input_el, true);
     }
     return passed_validation ? 0 : 1;
 }
 
 //#endregion
+
+function sendFormToServer(){
+    var order_data = {
+        name : $('#inputName').val(),
+        number : $('#inputNumber').val(),
+        adress : $('#inputAdress').val()
+    }
+    // console.log(order_data);
+    API.createOrder(order_data, (err, data) =>{
+        if(err){
+            console.error('server returned error');
+        } else {
+            console.log('server returned success');
+            // console.log(data);
+        }
+    });
+}
+
+function errorTipSetActive(input_el, is_shown){
+    if(is_shown){   // also paint it red
+        input_el.removeClass('input-valid');            
+        input_el.addClass('input-invalid');
+    }
+    input_el.closest('.form-group').find('.help-block.with-errors.error-text').
+        css('display', is_shown ? 'block' : 'none');
+}
 
 // adds order-page specific controls
 function initOrderPage(){
@@ -99,37 +135,28 @@ function initOrderPage(){
         testValidity($(event.target), isNumberValid);
     });
     
-
-    // TODO: adress validation
-
+    $('#inputAdress').on('input', () => {
+        validateAdress($(event.target));
+    });
 
     $('#submitButton').click(() => {
         var num_errors = 0;
         num_errors += showErrorIfInvalid($('#inputName'), isNameValid);
         num_errors += showErrorIfInvalid($('#inputNumber'), isNumberValid);
-        // TODO: check adress field here
-
-        if(num_errors == 0) {
-            var order_data = {
-                name : $('#inputName').val(),
-                number : $('#inputNumber').val(),
-                adress : $('#inputAdress').val()
+        
+        MapApi.geocodeAddress($('#inputAdress').val(), (err, coordinates) => {
+            if(err){
+                errorTipSetActive($('#inputAdress'), true);
+            } else if(num_errors == 0){
+                sendFormToServer();
             }
-            // console.log(order_data);
-            API.createOrder(order_data, (err, data) =>{
-                if(err){
-                    console.error('server returned error');
-                } else {
-                    console.log('server returned success');
-                    // console.log(data);
-                }
-            });
-        }
+        });
+        
     });
 }
 
 exports.initOrderPage = initOrderPage;
-},{"./API":1}],3:[function(require,module,exports){
+},{"./API":1,"./OrderGoogleMaps":3}],3:[function(require,module,exports){
 
 var markerClicked;
 var curAdress;
@@ -213,8 +240,6 @@ function geocodeLatLng(latlng, callback) {
     });
 }
 
-
-
 function geocodeAddress(address, callback) {
     var geocoder = new google.maps.Geocoder();
     geocoder.geocode({'address': address}, function (results, status) {
@@ -245,6 +270,7 @@ function calculateRoute(A_latlng, B_latlng, callback) {
 }
 
 exports.initialiseMap = initialiseMap;
+exports.geocodeAddress = geocodeAddress;
 },{}],4:[function(require,module,exports){
 /**
  * Created by chaika on 02.02.16.
@@ -286,6 +312,7 @@ $(function(){
     PizzaMenu.initialiseMenu();
     Order.initOrderPage();
     Maps.initialiseMap();
+    
 
     // form = $('form-horizontal').find('.form-control');
     // form = $('.form-horizontal ').find('.form-control');

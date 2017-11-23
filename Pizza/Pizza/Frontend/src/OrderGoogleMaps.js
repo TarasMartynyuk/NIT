@@ -81,8 +81,6 @@ function geocodeLatLng(latlng, callback) {
     });
 }
 
-
-
 function geocodeAddress(address, callback) {
     var geocoder = new google.maps.Geocoder();
     geocoder.geocode({'address': address}, function (results, status) {
@@ -113,3 +111,4 @@ function calculateRoute(A_latlng, B_latlng, callback) {
 }
 
 exports.initialiseMap = initialiseMap;
+exports.geocodeAddress = geocodeAddress;

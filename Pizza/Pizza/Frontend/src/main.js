@@ -14,6 +14,7 @@ $(function(){
     PizzaMenu.initialiseMenu();
     Order.initOrderPage();
     Maps.initialiseMap();
+    
 
     // form = $('form-horizontal').find('.form-control');
     // form = $('.form-horizontal ').find('.form-control');

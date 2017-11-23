@@ -24,13 +24,13 @@ function backendPost(url, data, callback) {
         contentType : 'application/json',
         data: JSON.stringify(data),
         success: function(data){
-            console.log(data);
             callback(null, data);
         },
         error: function(){
             callback(new Error("Ajax Failed"));
         }
     });
+
 }
 
 exports.getPizzaList = function(callback) {
