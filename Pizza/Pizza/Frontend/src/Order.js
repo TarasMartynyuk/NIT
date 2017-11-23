@@ -23,6 +23,7 @@ function validateAdress(adress_node, inputed_adress){
         } else {
             adress_node.removeClass('input-invalid');            
             adress_node.addClass('input-valid');
+            errorTipSetActive(adress_node, false);
         }
     });
 }
