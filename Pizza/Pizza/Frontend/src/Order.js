@@ -1,7 +1,7 @@
 // all JS for order page
 var API = require('./API');
-var MapApi = require('./OrderGoogleMaps')
-
+var MapApi = require('./OrderGoogleMaps');
+var PizzaCart = require('./pizza/PizzaCart');
 //#region validation funcs
 function isNameValid(inputed_name){
     return new RegExp("^([А-ЯA-Za-zа-яіІЩщїЇєЄ]+)( [А-ЯA-Za-zа-яіІЩщїЇєЄ]+){0,1}$").
@@ -53,19 +53,43 @@ function showErrorIfInvalid(input_el, validation_func){
 
 //#endregion
 
-function sendFormToServer(){
-    var order_data = {
-        name : $('#inputName').val(),
-        number : $('#inputNumber').val(),
-        adress : $('#inputAdress').val()
+function getOrderDescription() {
+    var orderDescription = String();    
+    var cart = PizzaCart.getPizzaInCart();
+    for (let i = 0; i < cart.length; i++) {
+        orderDescription += cart[i].pizza.title + " " +
+            cart[i].size + " " + 
+            cart[i].quantity + "шт. " + 
+            cart[i].price + "грн.\n";
     }
-    // console.log(order_data);
-    API.createOrder(order_data, (err, data) =>{
-        if(err){
-            console.error('server returned error');
+    return orderDescription;
+}
+
+function sendFormToServer(order_data){
+    
+    API.createOrder(order_data, (err, data) => {
+        if (err) {
+            console.error('Error creating order');
         } else {
-            console.log('server returned success');
-            // console.log(data);
+
+            console.log('Created order');
+            LiqPayCheckout.init({
+                data: data.data,
+                signature: data.signature,
+                embedTo: "#liqpay",
+                mode: "popup"	
+            }).on("liqpay.callback", function (data) {
+                console.log(data.status);
+                console.log(data);
+
+            }).on("liqpay.ready", function (data) {
+                console.log(data.status);
+                console.log(data);
+                
+            }).on("liqpay.close", function (data) {
+
+            });
+                        
         }
     });
 }
@@ -101,10 +125,18 @@ function initOrderPage(){
         num_errors += showErrorIfInvalid($('#inputNumber'), isNumberValid);
         
         MapApi.geocodeAddress($('#inputAdress').val(), (err, coordinates) => {
-            if(err){
+            if(err) {
                 errorTipSetActive($('#inputAdress'), true);
-            } else if(num_errors == 0){
-                sendFormToServer();
+            } else if(true) { // num_errors == 0) {
+                var order_data = {
+                    name : $('#inputName').val(),
+                    number : $('#inputNumber').val(),
+                    address : $('#inputAdress').val(),
+                    sum: $("#order-sum-bottom").text().split(" ")[0],
+                    pizzas: getOrderDescription()
+                }
+                console.log(order_data);
+                sendFormToServer(order_data);
             }
         });
         

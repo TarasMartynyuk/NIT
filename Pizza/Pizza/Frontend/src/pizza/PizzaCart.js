@@ -26,7 +26,8 @@ function addToCart(pizza, size) {
         Cart.push({
             pizza: pizza,
             size: size,
-            quantity: 1
+            quantity: 1,
+            price: pizza[size].price,
         });
     } 
     order_quantity++;
@@ -81,6 +82,7 @@ function incrementQuantity(pizza, size){
     Cart.forEach(function(element) {
         if(element.pizza.title && element.size == size){
             element.quantity += 1;
+            element.price += element.pizza[element.size].price;
         }
     });
     redrawCart();
@@ -197,7 +199,7 @@ function redrawCart() {
 
 //#endregion
 
-//#region Imports
+//#region Exports
 exports.removeFromCart = removeFromCart;
 exports.addToCart = addToCart;
 

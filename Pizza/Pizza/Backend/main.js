@@ -5,6 +5,7 @@ var express = require('express');
 var path = require('path');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
+var Crypto = require('crypto');
 
 function configureEndpoints(app) {
     var pages = require('./pages');
@@ -24,6 +25,7 @@ function configureEndpoints(app) {
 
     //Якщо не підійшов жоден url, тоді повертаємо файли з папки www
     app.use(express.static(path.join(__dirname, '../Frontend/www')));
+   
 }
 
 function startServer(port) {
