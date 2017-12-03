@@ -3,9 +3,8 @@
  */
 var Pizza_List = require('./data/Pizza_List');
 var Crypto = require('crypto');
-var LIQPAY_PUBLIC_KEY = "i90074349759";   // "i78643630544";
-var LIQPAY_PRIVATE_KEY = "fDnUdtKh7viRtY9QsdM34YaKPmzODKLAqtebyWKT";   // "ayINCfS0jx1vSvKnlgn5DYKrHjgUvnEfVSM3iOlB";
-
+var LIQPAY_PUBLIC_KEY = "i90074349759";   
+var LIQPAY_PRIVATE_KEY = "fDnUdtKh7viRtY9QsdM34YaKPmzODKLAqtebyWKT";
 exports.getPizzaList = function(req, res) {
     res.send(Pizza_List);
 };

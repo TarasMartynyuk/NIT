@@ -1,6 +1,6 @@
 
 var markerClicked;
-var curAdress;
+var currAdress;
 var curTime;
 
 function initialiseMap() {
@@ -36,12 +36,13 @@ function initialiseMap() {
         geocodeLatLng(coordinates, function (err, adress) {
             if (!err) {
                 //Дізналися адресу
-                //console.log(adress);
-                curAdress=adress;
-                $('.order-summary-address').html("<b>Адреса доставки:</b> "+curAdress);
-                $('#inputAddress').val(curAdress);
+                currAdress = adress;
+                $('.order-summary-address').html("<b>Адреса доставки:</b> "+currAdress);
+                $('#inputAdress').val(currAdress);
                 var pointClicked = coordinates;
-                if (markerClicked!=null) markerClicked.setMap(null);
+                if (markerClicked != null) { 
+                    markerClicked.setMap(null);
+                }
                 markerClicked = new google.maps.Marker({
                     position: pointClicked,
                     map: map,
@@ -53,23 +54,18 @@ function initialiseMap() {
         })
         calculateRoute(point,coordinates, function (err, response) {
             if (!err) {
-                // var res=leg;
-                // console.log(leg.duration.text);
                 directionsDisplay.setDirections(response);
-                //console.log(response.routes[0].legs[0].duration.text);
-                curTime=response.routes[0].legs[0].duration.text;
+                curTime = response.routes[0].legs[0].duration.text;
                 $('.order-summary-time').html("<b>Приблизний час доставки:</b> "+curTime);
             } else {
                 console.log("Помилка")
             }
         })
-
-
     });
 }
 
 function geocodeLatLng(latlng, callback) {
-//Модуль за роботу з адресою
+    //Модуль за роботу з адресою
     var geocoder = new google.maps.Geocoder();
     geocoder.geocode({'location': latlng}, function (results, status) {
         if (status === google.maps.GeocoderStatus.OK && results[1]) {
@@ -101,11 +97,9 @@ function calculateRoute(A_latlng, B_latlng, callback) {
         travelMode: google.maps.TravelMode["DRIVING"]
     }, function (response, status) {
         if (status == google.maps.DirectionsStatus.OK) {
-            // var leg = response.routes[0].legs[0];
-            // {duration: leg.duration}
             callback(null, response);
         } else {
-            callback(new Error("Can'	not	find	direction"));
+            callback(new Error("Can' not find direction"));
         }
     });
 }

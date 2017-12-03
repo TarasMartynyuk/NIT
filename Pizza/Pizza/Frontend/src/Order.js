@@ -2,6 +2,7 @@
 var API = require('./API');
 var MapApi = require('./OrderGoogleMaps');
 var PizzaCart = require('./pizza/PizzaCart');
+
 //#region validation funcs
 function isNameValid(inputed_name){
     return new RegExp("^([А-ЯA-Za-zа-яіІЩщїЇєЄ]+)( [А-ЯA-Za-zа-яіІЩщїЇєЄ]+){0,1}$").
@@ -28,6 +29,10 @@ function validateAdress(adress_node, inputed_adress){
     });
 }
 
+// tests wether the value of input element passes
+// the check defined by validation function
+// adds passed/didn't pass marker to element,
+// shows error tip if did not pass
 function testValidity(input_el, validation_func){
     if(validation_func(input_el.val())) {
         input_el.removeClass('input-invalid');            
@@ -50,9 +55,9 @@ function showErrorIfInvalid(input_el, validation_func){
     }
     return passed_validation ? 0 : 1;
 }
-
 //#endregion
 
+// string info used in LIQPAY widget
 function getOrderDescription() {
     var orderDescription = String();    
     var cart = PizzaCart.getPizzaInCart();
@@ -65,6 +70,7 @@ function getOrderDescription() {
     return orderDescription;
 }
 
+// posts order_data to backend
 function sendFormToServer(order_data){
     
     API.createOrder(order_data, (err, data) => {
